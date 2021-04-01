@@ -5,27 +5,28 @@ services:
     build:
       context: ../
       dockerfile: example/Dockerfile-proxy
-    networks:
-      - envoymesh
+    #networks:
+    #  - envoymesh
+    network_mode: bridge
     expose:
-      - "8000"
-      - "8001"
+      - "10000"
+      - "9901"
     ports:
-      - "8000:8000"
-      - "8001:8001"
+      - "10000:10000"
+      - "9901:9901"
 
-  web_service:
-    build:
-      context: .
-      dockerfile: Dockerfile-web-service
-    networks:
-      envoymesh:
-        aliases:
-          - web_service
-    expose:
-      - "80"
-    ports:
-      - "8080:80"
+#  web_service:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile-web-service
+#    networks:
+#      envoymesh:
+#        aliases:
+#          - web_service
+#    expose:
+#      - "80"
+#    ports:
+#      - "8080:80"
 
-networks:
-  envoymesh: {}
+#networks:
+#  envoymesh: {}
