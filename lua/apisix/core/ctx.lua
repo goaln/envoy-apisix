@@ -16,6 +16,13 @@
 --
 local _M = {version = 0.2}
 
+local function split_ip(ip)
+    local idx = string.find(ip, ":")
+    if idx then
+        return string.sub(ip, 0, idx-1)
+    end
+    return ip
+end
 
 local function get_client_ip(handler)
     local streamInfo = handler:streamInfo()
@@ -23,14 +30,14 @@ local function get_client_ip(handler)
         return nil
     end
 
-    local ip = streamInfo:downstreamLocalAddress()
-    if ip then
-        return ip
-    end
+    --local ip = streamInfo:downstreamLocalAddress()
+    --if ip then
+    --    return ip
+    --end
 
-    ip = streamInfo:downstreamDirectRemoteAddress()
+    local ip = streamInfo:downstreamDirectRemoteAddress()
     if ip then
-        return ip
+        return split_ip(ip)
     end
 end
 

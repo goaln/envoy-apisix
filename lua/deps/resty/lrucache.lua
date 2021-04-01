@@ -187,7 +187,7 @@ function _M.get(self, key)
     queue_remove(node)
     queue_insert_head(cache_queue, node)
 
-    if node.expire >= 0 and node.expire < ngx_now() then
+    if node.expire >= 0 and node.expire < ngx_now then
         -- print("expired: ", node.expire, " > ", ngx_now())
         return nil, val, node.user_flags
     end
@@ -255,7 +255,7 @@ function _M.set(self, key, value, ttl, flags)
     queue_insert_head(self.cache_queue, node)
 
     if ttl then
-        node.expire = ngx_now() + ttl
+        node.expire = ngx_now + ttl
     else
         node.expire = -1
     end

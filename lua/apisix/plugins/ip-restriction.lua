@@ -153,7 +153,7 @@ function _M.access(conf, ctx)
     end
 
     if block then
-        return 403, { message = "Your IP address is not allowed" }
+        return 403, { message = "Your IP address is not allowed: "..remote_addr }
     end
 end
 
